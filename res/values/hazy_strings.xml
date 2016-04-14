@@ -145,4 +145,8 @@
     <string name="lockscreen_wallpaper_clear_title">Return to default</string>
     <string name="reset_lockscreen_wallpaper">Lockscreen wallpaper set back to default</string>
 
+    <!-- OneHandMode -->
+    <string name="one_hand_mode_title">One Hand Mode</string>
+    <string name="one_hand_mode_summary">Enable One Hand Mode</string>
+
 </resources>

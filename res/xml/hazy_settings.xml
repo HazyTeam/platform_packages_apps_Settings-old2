@@ -86,6 +86,12 @@
         android:title="@string/hazy_navbar_settings" >
 
         <SwitchPreference
+        android:key="one_hand_mode"
+        android:title="@string/one_hand_mode_title"
+        android:summary="@string/one_hand_mode_summary"
+        android:defaultValue="false" />        
+
+        <SwitchPreference
         android:key="switch_last_app"
         android:title="@string/switch_last_app_title"
         android:summary="@string/switch_last_app_summary"

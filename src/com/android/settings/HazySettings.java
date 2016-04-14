@@ -58,6 +58,7 @@ public class HazySettings extends SettingsPreferenceFragment implements
     private static final String TAG = "HazySettings";
 
     private static final String DOUBLE_TAP_SLEEP_GESTURE = "double_tap_sleep_gesture";
+    private static final String ONE_HAND_MODE = "one_hand_mode";
     private static final String SMART_PULLDOWN = "smart_pulldown";
     private static final String STATUS_BAR_QUICK_QS_PULLDOWN = "status_bar_quick_qs_pulldown";
     private static final String SWITCH_LAST_APP = "switch_last_app";
@@ -70,6 +71,7 @@ public class HazySettings extends SettingsPreferenceFragment implements
     private ListPreference mQuickPulldown;
     private ListPreference mSmartPulldown;
 
+    private SwitchPreference mOneHandMode;
     private SwitchPreference mTapToSleepPreference;
     private SwitchPreference mSwitchLastApp;
     private SwitchPreference mVolBtnMusicControls;
@@ -87,6 +89,7 @@ public class HazySettings extends SettingsPreferenceFragment implements
 
         addPreferencesFromResource(R.xml.hazy_settings);
 
+        mOneHandMode = (SwitchPreference) findPreference(ONE_HAND_MODE);
         mTapToSleepPreference = (SwitchPreference) findPreference(DOUBLE_TAP_SLEEP_GESTURE);
         mSwitchLastApp = (SwitchPreference) findPreference(SWITCH_LAST_APP);
         mVolBtnMusicControls = (SwitchPreference) findPreference(VOLBTN_MUSIC_CONTROLS);
@@ -137,6 +140,13 @@ public class HazySettings extends SettingsPreferenceFragment implements
                 Settings.System.VOLBTN_MUSIC_CONTROLS, 0) == 1);
             mVolBtnMusicControls.setOnPreferenceChangeListener(this);
         }       
+
+        // One Hand Mode
+        if (mOneHandMode != null) {
+            mOneHandMode.setChecked(Settings.System.getInt(getContentResolver(),
+                Settings.System.ONE_HAND_MODE, 0) == 1);
+            mOneHandMode.setOnPreferenceChangeListener(this);
+        }
     }
 
     @Override
@@ -159,6 +169,10 @@ public class HazySettings extends SettingsPreferenceFragment implements
         if (preference == mVolBtnMusicControls) {
             boolean value = (Boolean) objValue;
             Settings.System.putInt(getContentResolver(), VOLBTN_MUSIC_CONTROLS, value ? 1 : 0);
+        }
+        if (preference == mOneHandMode) {
+            boolean value = (Boolean) objValue;
+            Settings.System.putInt(getContentResolver(), ONE_HAND_MODE, value ? 1 : 0);
         }
         if (preference == mQuickPulldown) {
             int quickPulldown = Integer.valueOf((String) objValue);
